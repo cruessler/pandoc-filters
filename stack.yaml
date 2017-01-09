@@ -1,0 +1,26 @@
+flags:
+  semigroups:
+    bytestring-builder: false
+extra-package-dbs: []
+packages:
+- '.'
+extra-deps:
+- aeson-0.9.0.1
+- attoparsec-0.13.1.0
+- dlist-0.8.0.2
+- fail-4.9.0.0
+- hashable-1.2.4.0
+- mtl-2.2.1
+- pandoc-types-1.16.1.1
+- primitive-0.6.1.0
+- regex-base-0.93.2
+- regex-posix-0.95.2
+- scientific-0.3.4.9
+- semigroups-0.18.2
+- syb-0.6
+- tagged-0.8.5
+- text-1.2.2.1
+- transformers-compat-0.5.1.4
+- unordered-containers-0.2.7.1
+- vector-0.11.0.0
+resolver: ghc-7.10.3
