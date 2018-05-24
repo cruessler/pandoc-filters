@@ -3,7 +3,8 @@
 This repository contains the pandoc filters I use to convert different stages
 of my PhD thesis.
 
-Currently they are configured to work with pandoc 1.17.2.
+Currently they are configured to work with pandoc 1.19.2.4. This version comes
+with Ubuntu 18.04 and is compiled with pandoc-filters 1.17.0.5.
 
 ## Installation
 
