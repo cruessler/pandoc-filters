@@ -7,7 +7,7 @@ license:             MIT
 license-file:        LICENSE
 author:              Christoph Rüßler
 maintainer:          christoph.ruessler@mailbox.org
-copyright:           2016 Christoph Rüßler
+copyright:           2016–2018 Christoph Rüßler
 build-type:          Simple
 extra-source-files:  README.md
 cabal-version:       >=1.10
