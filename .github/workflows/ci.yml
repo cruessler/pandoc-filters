@@ -1,0 +1,24 @@
+# As of May 2020, this action is supposed to make sure that the project is in a
+# compilable state.
+on: [push]
+name: build
+jobs:
+  runhaskell:
+    name: pandoc-filters
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-haskell@v1.1
+        with:
+          ghc-version: 'latest'
+          cabal-version: 'latest'
+          stack-version: 'latest'
+
+      - name: Setup
+        run: stack setup
+
+      - name: Build
+        run: stack build
+
+      - name: Install
+        run: stack install
