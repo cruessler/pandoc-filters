@@ -1,0 +1,21 @@
+on: [push]
+name: build
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        stack: ['1.9.3.1']
+
+    name: Stack ${{ matrix.stack }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-haskell@v1.1
+        with:
+          enable-stack: true
+          stack-setup-ghc: true
+          stack-version: ${{ matrix.stack }}
+
+      - run: stack build
+      - run: stack install
