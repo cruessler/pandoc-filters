@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 import Text.Pandoc.JSON
 
 main :: IO ()
