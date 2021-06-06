@@ -3,8 +3,8 @@
 This repository contains the pandoc filters I use to convert different stages
 of my PhD thesis.
 
-Currently they are configured to work with pandoc 1.19.2.4. This version comes
-with Ubuntu 18.04 and is compiled with pandoc-filters 1.17.0.5.
+Currently they are configured to work with pandoc 2.9.2.1 This version comes
+with Ubuntu 20.10 and is compiled with pandoc-types 1.20.
 
 ## Installation
 
@@ -30,18 +30,22 @@ uses ([related issue](https://github.com/jgm/pandoc/issues/3131)).
 
 ## Updating to newer versions of pandoc
 
-`pandoc-filters.cabal` has to be updated to have pandoc-types’ version match
-the version your pandoc was compiled with. To get the correct version of
-pandoc-types, run:
+`pandoc-filters.cabal` and `stack.yaml` both have to be updated to have
+pandoc-types’ version match the version your pandoc was compiled with. To get
+the correct version of pandoc-types, run:
 
-    $ pandoc version
+    $ pandoc --version
     pandoc 1.19.2.4
     Compiled with pandoc-types 1.17.0.5, texmath 0.9.4.4, skylighting 0.3.3.1
     […]
 
-To re-resolve package dependencies afterwards, run:
+When you then run `stack build`, Stack will automatically pick up the new
+dependency and exit with an error if there are unmet requirements, hopefully
+with a helpful error message on how to modify `stack.yaml`.
 
-    stack solver --update-config --system-ghc
+You may need to update stack by running:
+
+    stack upgrade --force-download
 
 ## Updating to newer versions of GHC
 
@@ -49,6 +53,7 @@ To re-resolve package dependencies afterwards, run:
 To update that key (e. g. to use a newer version when your system’s GHC has
 been updated), run:
 
-    stack config set resolver 8.0
+    # GHC 8.8.3 is the version used by Ubuntu 20.10
+    stack config set resolver ghc-8.8
 
 This updates `stack.yaml` to work with a new version.

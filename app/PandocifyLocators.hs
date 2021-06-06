@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+import qualified Data.Text as T
 import Text.Pandoc.JSON
 import Text.Pandoc.Walk
 import Text.Regex.Posix
@@ -20,7 +22,7 @@ pandocifyLocators :: Pandoc -> Pandoc
 pandocifyLocators pandoc@(Pandoc meta blocks) =
   case blocks of
     (Para [Cite [Citation {citationId = id, citationPrefix = [], citationSuffix = []}] inlines]:rest) ->
-      Pandoc meta $ walk (convertBlock id) rest
+      Pandoc meta $ walk (convertBlock $ T.unpack id) rest
     _ ->
       pandoc
 
@@ -55,11 +57,12 @@ isolateNumbers inlines =
   f inlines []
   where
     f (s@(Str str):xs) acc
-      | matches = (Str number:Str ")":f xs acc)
+      | matches = (Str (T.pack number):Str ")":f xs acc)
       | otherwise = (s:f xs acc)
       where
-        matches = str =~ regex :: Bool
-        match = str =~ regex :: AllTextSubmatches [] String
+        unpackedStr = T.unpack str
+        matches = unpackedStr =~ regex :: Bool
+        match = unpackedStr =~ regex :: AllTextSubmatches [] String
 
         (_:[number, _]) = getAllTextSubmatches match
 
@@ -67,7 +70,7 @@ isolateNumbers inlines =
 
     f [] acc = acc
 
-    regex = "([0-9]+(–[0-9]+)?)\\)$"
+    regex = "([0-9]+(–[0-9]+)?)\\)$" :: String
 
 
 pandocifyInlines :: String -> [Inline] -> [Inline]
@@ -75,26 +78,26 @@ pandocifyInlines id inlines = f id inlines []
   where
     -- Returns "[@lorem, S. 100 f.]".
     g id locator =
-      RawInline (Format "markdown") ("[@" ++ id ++ ", S. " ++ locator ++ " f.]")
+      RawInline (Format "markdown") (T.pack $ "[@" ++ id ++ ", S. " ++ locator ++ " f.]")
 
     -- Returns "[@lorem, S. 100–102]".
     h id locator =
-      RawInline (Format "markdown") ("[@" ++ id ++ ", S. " ++ locator ++ "]")
+      RawInline (Format "markdown") (T.pack $ "[@" ++ id ++ ", S. " ++ locator ++ "]")
 
     -- Turns "(S. 100 f.)" into "[@lorem, S. 100 f.]".
     f id (Str "(S.":Space:Str number:Space:Str "f.)":xs) acc =
-      (g id number:f id xs acc)
+      (g id (T.unpack number):f id xs acc)
 
     -- Turns "(S. 100)" or "(S. 100–102)" into "[@lorem, S. 100]" or "[@lorem,
     -- S. 100–102]".
     f id (Str "(S.":Space:Str number:Str ")":xs) acc
-      | matches   = (h id number:f id xs acc)
+      | matches   = (h id (T.unpack number):f id xs acc)
       | otherwise = (Str "(S.":Space:Str number:Str ")":f id xs acc)
       where
-        matches = number =~ regex :: Bool
+        matches = (T.unpack number) =~ regex :: Bool
 
     f id (x:xs) acc = (x:f id xs acc)
 
     f id [] acc = acc
 
-    regex = "([0-9]+)$"
+    regex = "([0-9]+)$" :: String
