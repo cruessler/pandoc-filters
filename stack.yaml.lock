@@ -10,7 +10,7 @@ packages:
       size: 45845
       sha256: b378b1f4a94f2911e9774c67e16859d7deae1ee1bad787cf790443e1f031388f
   original:
-    hackage: Cabal-3.4.0.0
+    hackage: Cabal-3.4.0.0@sha256:74ca2bc93297dc20b291c8dc721055278aa4a7942b0b5aca86766d407e3cbe5f,30533
 - completed:
     hackage: QuickCheck-2.13.2@sha256:636e7265bf75122e7e2f97627c47aad3b772ee3b35b134cafb6095116ce8d07a,6974
     pantry-tree:
