@@ -3,8 +3,8 @@
 This repository contains the pandoc filters I use to convert different stages
 of my PhD thesis.
 
-Currently they are configured to work with pandoc 2.9.2.1 This version comes
-with Ubuntu 20.10 and is compiled with pandoc-types 1.20.
+Currently they are configured to work with pandoc 2.17.1.1 This version comes
+with Ubuntu 23.04 and is compiled with pandoc-types 1.22.2.1.
 
 ## Installation
 
@@ -35,8 +35,8 @@ pandoc-types’ version match the version your pandoc was compiled with. To get
 the correct version of pandoc-types, run:
 
     $ pandoc --version
-    pandoc 1.19.2.4
-    Compiled with pandoc-types 1.17.0.5, texmath 0.9.4.4, skylighting 0.3.3.1
+    pandoc 2.17.1.1
+    Compiled with pandoc-types 1.22.2.1, texmath 0.12.4, skylighting 0.12.3.1,
     […]
 
 When you then run `stack build`, Stack will automatically pick up the new

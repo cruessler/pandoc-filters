@@ -138,12 +138,12 @@ packages:
   original:
     hackage: mtl-2.2.2@sha256:1050fb71acd9f5d67da7d992583f5bd0eb14407b9dc7acc122af1b738b706ca3,2261
 - completed:
-    hackage: pandoc-types-1.20@sha256:8362f8f1ed4404f5a2ffde3c6e64718a5443df88e6a93bbe59d992b1817f849a,4109
+    hackage: pandoc-types-1.22.2.1@sha256:b66c1d501537f99b3627aeed1f35b40ca075306b7c35d16fa9a49c9ccebefe5f,4130
     pantry-tree:
-      size: 855
-      sha256: 7fc1ea08fc800b6ba6c62389fcc9a803e98d30aa886627534b90fc5d5410f492
+      size: 737
+      sha256: cbb0b8100d99570847b09f22ca9857797cb5accdb019600665540128cdf8cf57
   original:
-    hackage: pandoc-types-1.20@sha256:8362f8f1ed4404f5a2ffde3c6e64718a5443df88e6a93bbe59d992b1817f849a,4109
+    hackage: pandoc-types-1.22.2.1@sha256:b66c1d501537f99b3627aeed1f35b40ca075306b7c35d16fa9a49c9ccebefe5f,4130
 - completed:
     hackage: parsec-3.1.14.0@sha256:72d5c57e6e126adaa781ab97b19dc76f68490c0a3d88f14038219994cabe94e1,4356
     pantry-tree:
