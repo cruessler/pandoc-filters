@@ -28,15 +28,9 @@ pandocifyLocators pandoc@(Pandoc meta blocks) =
 
 
 convertBlock :: String -> Block -> Block
-convertBlock id (BlockQuote blocks) =
-  BlockQuote $ walk (convertBlockInQuote id) blocks
-convertBlock _ block = block
-
-
-convertBlockInQuote :: String -> Block -> Block
-convertBlockInQuote id (Para inlines) =
+convertBlock id (Para inlines) =
   Para (pandocifyInlines id . isolateNumbers . convertSoftBreaks $ inlines)
-convertBlockInQuote _ block = block
+convertBlock _ block = block
 
 
 {-|
