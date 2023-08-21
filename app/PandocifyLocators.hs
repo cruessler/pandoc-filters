@@ -44,27 +44,28 @@ convertSoftBreaks inlines = walk f inlines
 
 
 {-|
- Turns `Str "100)"` into `Str "100", Str ")"`.
+ Turns `Str "100)"` into `Str "100", Str ")", Str ""`.
+ Turns `Str "100):"` into `Str "100", Str ")", Str ":"`.
 -}
 isolateNumbers :: [Inline] -> [Inline]
 isolateNumbers inlines =
   f inlines []
   where
     f (s@(Str str):xs) acc
-      | matches = (Str (T.pack number):Str ")":f xs acc)
+      | matches = (Str (T.pack number):Str ")":Str (T.pack suffix):f xs acc)
       | otherwise = (s:f xs acc)
       where
         unpackedStr = T.unpack str
         matches = unpackedStr =~ regex :: Bool
         match = unpackedStr =~ regex :: AllTextSubmatches [] String
 
-        (_:[number, _]) = getAllTextSubmatches match
+        (_:[number, _, suffix]) = getAllTextSubmatches match
 
     f (x:xs) acc = (x:f xs acc)
 
     f [] acc = acc
 
-    regex = "([0-9]+(–[0-9]+)?)\\)$" :: String
+    regex = "([0-9]+(–[0-9]+)?)\\)(.*)$" :: String
 
 
 pandocifyInlines :: String -> [Inline] -> [Inline]
